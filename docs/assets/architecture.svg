@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5f6368"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a73e8"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8f9fa"/>
+      <stop offset="1" stop-color="#f1f3f4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="920" height="460" fill="#ffffff"/>
+
+  <!-- your-machine boundary -->
+  <rect x="14" y="14" width="700" height="432" rx="14" fill="#fbfdff" stroke="#7cb0e8" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="34" y="42" font-size="13" font-weight="700" fill="#1a56b0">YOUR MACHINE — everything stays here</text>
+  <text x="34" y="60" font-size="11" fill="#5f6368">No cloud · no telemetry · no accounts · works fully offline</text>
+
+  <!-- Chrome + extension UI -->
+  <rect x="34" y="86" width="196" height="240" rx="10" fill="url(#hdr)" stroke="#dadce0"/>
+  <rect x="34" y="86" width="196" height="44" rx="10" fill="#eef3fc" stroke="#dadce0"/>
+  <text x="132" y="107" font-size="13" font-weight="700" fill="#202124" text-anchor="middle">Chrome</text>
+  <text x="132" y="122" font-size="10.5" fill="#5f6368" text-anchor="middle">Manifest V3 extension (UI)</text>
+  <text x="48" y="156" font-size="11" fill="#202124">• Dashboard &amp; 13-tab audits</text>
+  <text x="48" y="176" font-size="11" fill="#202124">• Read-only source viewer</text>
+  <text x="48" y="196" font-size="11" fill="#202124">• Snapshot diff &amp; compare</text>
+  <text x="48" y="216" font-size="11" fill="#202124">• Ask-the-Auditor chat</text>
+  <text x="48" y="236" font-size="11" fill="#202124">• Exports &amp; settings</text>
+  <text x="48" y="262" font-size="10" fill="#5f6368">Permissions: management,</text>
+  <text x="48" y="276" font-size="10" fill="#5f6368">nativeMessaging, storage</text>
+  <text x="48" y="290" font-size="10" font-weight="700" fill="#188038">zero network calls</text>
+  <text x="48" y="312" font-size="10" fill="#5f6368">Pinned ID: dmcdpgif…cnahd</text>
+
+  <!-- native messaging arrow -->
+  <path d="M 236 190 H 320" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#arrowBlue)" fill="none"/>
+  <text x="278" y="172" font-size="10.5" font-weight="700" fill="#1a73e8" text-anchor="middle">Native messaging</text>
+  <text x="278" y="212" font-size="9.5" fill="#5f6368" text-anchor="middle">JSON-RPC · whitelisted</text>
+  <text x="278" y="224" font-size="9.5" fill="#5f6368" text-anchor="middle">actions · 1 MB frames</text>
+
+  <!-- Go scanner -->
+  <rect x="326" y="86" width="230" height="240" rx="10" fill="url(#hdr)" stroke="#dadce0"/>
+  <rect x="326" y="86" width="230" height="44" rx="10" fill="#e6f4ea" stroke="#dadce0"/>
+  <text x="441" y="107" font-size="13" font-weight="700" fill="#202124" text-anchor="middle">Native scanner</text>
+  <text x="441" y="122" font-size="10.5" fill="#5f6368" text-anchor="middle">Go · scanner.exe · Windows x64</text>
+  <text x="340" y="156" font-size="11" fill="#202124">• 14 modular analyzers, versioned</text>
+  <text x="340" y="176" font-size="11" fill="#202124">&#160;&#160;rule engine (37 rules)</text>
+  <text x="340" y="196" font-size="11" fill="#202124">• Token-level JS lexer (no eval)</text>
+  <text x="340" y="216" font-size="11" fill="#202124">• SHA-256 incremental scans</text>
+  <text x="340" y="236" font-size="11" fill="#202124">• Secret detection + redaction</text>
+  <text x="340" y="256" font-size="11" fill="#202124">• Archive guards (zip/CRX)</text>
+  <text x="340" y="276" font-size="11" fill="#202124">• JSON / CSV / HTML / PDF export</text>
+  <text x="340" y="302" font-size="10" font-weight="700" fill="#b06000">static analysis only — never</text>
+  <text x="340" y="315" font-size="10" font-weight="700" fill="#b06000">executes the audited code</text>
+
+  <!-- data layer arrows -->
+  <path d="M 441 330 V 356" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 441 330 H 604 V 356" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+
+  <!-- data layer boxes -->
+  <g>
+    <rect x="150" y="362" width="180" height="70" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <text x="240" y="383" font-size="11.5" font-weight="700" fill="#202124" text-anchor="middle">Chrome profiles &amp; files</text>
+    <text x="240" y="400" font-size="10" fill="#5f6368" text-anchor="middle">all profiles · all extensions</text>
+    <text x="240" y="416" font-size="10" font-weight="700" fill="#188038" text-anchor="middle">read-only access</text>
+  </g>
+  <g>
+    <rect x="352" y="362" width="180" height="70" rx="8" fill="#ffffff" stroke="#dadce0"/>
+    <text x="442" y="383" font-size="11.5" font-weight="700" fill="#202124" text-anchor="middle">Local store</text>
+    <text x="442" y="400" font-size="10" fill="#5f6368" text-anchor="middle">scan history · snapshots</text>
+    <text x="442" y="416" font-size="10" fill="#5f6368" text-anchor="middle">AI-answer cache (hashed)</text>
+  </g>
+  <g>
+    <rect x="554" y="362" width="150" height="70" rx="8" fill="#fff8e6" stroke="#f0d48a"/>
+    <text x="629" y="383" font-size="11.5" font-weight="700" fill="#7a5c00" text-anchor="middle">LM Studio (optional)</text>
+    <text x="629" y="400" font-size="10" fill="#7a5c00" text-anchor="middle">explains evidence only</text>
+    <text x="629" y="416" font-size="10" font-weight="700" fill="#7a5c00" text-anchor="middle">127.0.0.1:1234 only</text>
+  </g>
+
+  <!-- crossed cloud -->
+  <g transform="translate(790, 200)">
+    <path d="M 20 46 q -16 0 -16 -14 q 0 -12 12 -13 q 2 -16 18 -16 q 14 0 17 12 q 14 -2 14 11 q 0 12 -13 12 z" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5"/>
+    <text x="26" y="70" font-size="10.5" fill="#5f6368" text-anchor="middle">no cloud</text>
+    <line x1="-6" y1="4" x2="58" y2="52" stroke="#d93025" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="816" y="300" font-size="10" fill="#5f6368" text-anchor="middle">The scanner's only network</text>
+  <text x="816" y="314" font-size="10" fill="#5f6368" text-anchor="middle">traffic is loopback to your</text>
+  <text x="816" y="328" font-size="10" fill="#5f6368" text-anchor="middle">own LM Studio (optional).</text>
+</svg>
