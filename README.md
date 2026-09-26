@@ -29,9 +29,9 @@ This tool gives you that visibility:
 - 🔒 **Read-only.** It never disables, modifies, or uninstalls anything. It never executes the code it audits.
 - 🧯 **Audits itself.** `npm run scan:self` points the scanner at its own extension package — the README you are reading was shipped by a tool that ran on itself.
 
-![Dashboard overview — real analyzer output on the bundled test fixtures](docs/screenshots/overview.png)
+![25-second tour: onboarding checks, a live scan, search, evidence-first findings, the read-only source viewer, a snapshot diff and the compare matrix](docs/screenshots/demo.gif)
 
-*Screenshots show real analyzer output on the [bundled test fixtures](fixtures/) via the [demo harness](#try-it-without-installing-anything) — no mock data.*
+*Everything in this tour is genuine analyzer output on the [bundled test fixtures](fixtures/) via the [demo harness](#try-it-without-installing-anything) — no mock data, no staged screenshots. Full-resolution still: [dashboard overview](docs/screenshots/overview.png).*
 
 ## What it checks
 
@@ -152,6 +152,8 @@ npm run scan:self    # the auditor audits its own extension package
 npm run demo         # demo harness (real scanner + synthetic profile)
 npm run package      # build + cross-compile scanner.exe + assemble release ZIP
 ```
+
+The animated README tour is reproducible, not staged: with the demo server running, `node scripts/demo-gif.mjs` drives the real dashboard through a scripted first-run story (Playwright), and `python3 scripts/make-gif.py` assembles the frames into `docs/screenshots/demo.gif` (Pillow).
 
 The Go scanner deliberately uses **zero third-party modules**, so the Windows cross-compile (`GOOS=windows GOARCH=amd64 go build .`) is hermetic and reproducible. The repository carries 14 fixture extensions — deliberately misbehaving ones (broad hosts, embedded secrets, obfuscation, MV2 legacy, malformed manifests…) — that the test matrix scans for expected findings. No test ever asserts a hardcoded "expected result" without scanning real fixture input.
 

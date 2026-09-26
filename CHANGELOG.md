@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Animated README tour (`docs/screenshots/demo.gif`, 25 s): a scripted
+  first-run story — onboarding, live scan, search, security findings,
+  read-only source viewer, snapshot diff, compare matrix — recorded from the
+  real dashboard and real scanner output via the demo harness. Reproducible
+  with `node scripts/demo-gif.mjs` + `python3 scripts/make-gif.py`
+  (Playwright + Pillow, dev-only).
+
 ## [1.0.0] — 2026-09-27
 
 First public release.
