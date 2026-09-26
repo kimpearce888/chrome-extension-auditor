@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  scanner:
+    name: Native scanner (Go)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: native
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Unit + integration tests
+        run: go test -timeout 180s ./...
+
+      - name: Cross-compile Windows x64
+        run: |
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o scanner.exe .
+          file scanner.exe
+
+      - name: CLI smoke test (scan bundled fixtures)
+        run: go run . --scan-dir ../fixtures --mode standard
+
+  extension:
+    name: Extension (TypeScript + Vite)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Local-only lint (no remote resources)
+        run: npm run lint
+
+      - name: Self-audit (auditor audits its own extension)
+        run: npm run scan:self
+
+  package:
+    name: Package Windows ZIP
+    runs-on: ubuntu-latest
+    needs: [scanner, extension]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Assemble distribution ZIP
+        run: npm run package
+
+      - name: Verify ZIP contents
+        run: |
+          unzip -l package/Local-Chrome-Extension-Auditor-Windows.zip | head -20
+          test -f package/Local-Chrome-Extension-Auditor/native/scanner.exe
+          test -f package/Local-Chrome-Extension-Auditor/extension/manifest.json
+          test -f package/Local-Chrome-Extension-Auditor/Install.bat
+          echo "ZIP layout verified"

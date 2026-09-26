@@ -38,3 +38,4 @@ Thumbs.db
 # ---- reports / data generated at runtime ----
 reports/
 *.log
+native/native
