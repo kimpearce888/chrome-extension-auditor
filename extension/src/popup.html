@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Local Extension Auditor</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      width: 320px; margin: 0; padding: 12px;
+      font: 13px/1.45 system-ui, "Segoe UI", Arial, sans-serif;
+      background: #f5f6f8; color: #1c2430;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #14181f; color: #e6e9ee; }
+    }
+    h1 { font-size: 14px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+    h1 img { width: 20px; height: 20px; }
+    .local-pill {
+      display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px;
+      background: #e0f2e9; color: #16562f; border: 1px solid #b5d8c5;
+    }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0; }
+    .stat {
+      background: rgba(127,127,127,.08); border-radius: 8px; padding: 8px;
+    }
+    .stat b { display: block; font-size: 17px; }
+    .stat span { font-size: 11px; opacity: .75; }
+    .btnrow { display: flex; gap: 8px; margin-top: 10px; }
+    button {
+      flex: 1; padding: 8px; font-size: 12.5px; border-radius: 8px; cursor: pointer;
+      border: 1px solid #b9c2cc; background: #fff; color: inherit;
+    }
+    @media (prefers-color-scheme: dark) { button { background: #1d232d; border-color: #39424e; } }
+    button.primary { background: #2e6ca2; border-color: #2e6ca2; color: #fff; }
+    button:focus-visible { outline: 2px solid #7ab4e6; outline-offset: 1px; }
+    .meta { font-size: 11px; opacity: .7; margin-top: 8px; }
+    .warn { color: #9a6700; }
+    .err { color: #b3261e; }
+  </style>
+</head>
+<body>
+  <h1><img src="icons/icon32.png" alt="" /> Extension Auditor <span class="local-pill" id="localPill">Local-only mode</span></h1>
+  <div class="stat-grid">
+    <div class="stat"><b id="extCount">–</b><span>Extensions found</span></div>
+    <div class="stat"><b id="profCount">–</b><span>Profiles scanned</span></div>
+    <div class="stat"><b id="secFindings">–</b><span>Security findings</span></div>
+    <div class="stat"><b id="perfFindings">–</b><span>Performance findings</span></div>
+    <div class="stat"><b id="privFindings">–</b><span>Privacy findings</span></div>
+    <div class="stat"><b id="compatFindings">–</b><span>Compatibility findings</span></div>
+  </div>
+  <div class="meta">Last scan: <span id="lastScan">Not available</span></div>
+  <div class="meta" id="statusLine"></div>
+  <div class="btnrow">
+    <button class="primary" id="openDashboard">Open Dashboard</button>
+    <button id="quickScan">Quick Scan</button>
+  </div>
+  <script type="module" src="popup/popup.ts"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Local Chrome Extension Auditor</title>
+  <link rel="stylesheet" href="dashboard/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="icons/icon32.png" alt="" width="22" height="22" />
+        <span>Local Chrome Extension Auditor</span>
+        <span class="pill pill-local" id="localPill" title="Chrome scan: local · Filesystem scan: local · AI: LM Studio local · Network: no external connection required">
+          Local-only mode
+        </span>
+      </div>
+      <nav class="tabs" aria-label="Main navigation">
+        <a href="#/overview" class="tab" data-view="overview">Overview</a>
+        <a href="#/extensions" class="tab" data-view="extensions">Extensions</a>
+        <a href="#/compare" class="tab" data-view="compare">Compare</a>
+        <a href="#/history" class="tab" data-view="history">History</a>
+        <a href="#/settings" class="tab" data-view="settings">Settings</a>
+        <a href="#/privacy" class="tab" data-view="privacy">Privacy</a>
+      </nav>
+      <div class="topbar-actions">
+        <input type="search" id="globalSearch" placeholder="Search extensions…  ( / )" aria-label="Search extensions" />
+        <button id="btnScan" class="btn primary">Scan Again</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="scanBanner" class="scan-banner" hidden>
+    <div class="scan-banner-inner">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="scan-progress-text" id="scanProgressText" role="status" aria-live="polite">Preparing…</div>
+      <div class="scan-bar"><div class="scan-bar-fill" id="scanBarFill"></div></div>
+      <button id="btnCancelScan" class="btn">Cancel</button>
+    </div>
+  </div>
+
+  <main id="main" class="main" tabindex="-1"></main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Static analysis documents evidence; it does not prove intent. You remain in control of all decisions.</span>
+      <span id="footerMeta"></span>
+    </div>
+  </footer>
+
+  <script type="module" src="dashboard/app.ts"></script>
+</body>
+</html>
