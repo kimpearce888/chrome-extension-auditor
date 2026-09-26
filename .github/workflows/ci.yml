@@ -31,7 +31,8 @@ jobs:
           file scanner.exe
 
       - name: CLI smoke test (scan bundled fixtures)
-        run: go run . --scan-dir ../fixtures --mode standard
+        # absolute path on purpose: the scanner (correctly) refuses '..' segments
+        run: go run . --scan-dir "$GITHUB_WORKSPACE/fixtures" --mode standard
 
   extension:
     name: Extension (TypeScript + Vite)
