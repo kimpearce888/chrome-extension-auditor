@@ -1,0 +1,40 @@
+# ---- build output ----
+extension/dist/
+package/
+native/scanner.exe
+native/scanner-demo
+native/localextensionauditor
+native/local-extension-auditor
+*.zip
+!docs/**/*.zip
+
+# ---- demo harness ----
+.demo/
+
+# ---- secrets & local config ----
+.extension-key.txt
+*.pem
+*.key
+.env
+.env.*
+
+# ---- node ----
+node_modules/
+npm-debug.log*
+.npm/
+
+# ---- go ----
+*.test
+*.out
+*.prof
+
+# ---- editors / OS ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---- reports / data generated at runtime ----
+reports/
+*.log

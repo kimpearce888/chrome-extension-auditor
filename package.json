@@ -1,0 +1,25 @@
+{
+  "name": "local-chrome-extension-auditor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fully local Chrome Extension Auditor — MV3 extension + Go native scanner + LM Studio (local only).",
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix extension run dev",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "lint": "node scripts/lint.mjs",
+    "scan:self": "node scripts/self-scan.mjs",
+    "demo": "node scripts/demo.mjs",
+    "package": "node scripts/package.mjs",
+    "package:windows": "node scripts/package.mjs --windows"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.280",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
