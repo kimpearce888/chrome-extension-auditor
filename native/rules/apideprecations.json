@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "deprecations": [
+    {"api": "chrome.tabs.executeScript", "status": "removed", "note": "Removed in MV3 contexts; replaced by chrome.scripting.executeScript.", "replacement": "chrome.scripting.executeScript", "appliesTo": "all"},
+    {"api": "chrome.tabs.insertCSS", "status": "removed", "note": "Removed in MV3 contexts; replaced by chrome.scripting.insertCSS.", "replacement": "chrome.scripting.insertCSS", "appliesTo": "all"},
+    {"api": "chrome.tabs.removeCSS", "status": "removed", "note": "Replaced by chrome.scripting.removeCSS.", "replacement": "chrome.scripting.removeCSS", "appliesTo": "all"},
+    {"api": "chrome.browserAction", "status": "removed", "note": "MV2 API; replaced by chrome.action in MV3.", "replacement": "chrome.action", "appliesTo": "all"},
+    {"api": "chrome.pageAction", "status": "removed", "note": "MV2 API; replaced by chrome.action in MV3.", "replacement": "chrome.action", "appliesTo": "all"},
+    {"api": "chrome.extension.getBackgroundPage", "status": "removed", "note": "Not available with MV3 service workers.", "replacement": "message passing", "appliesTo": "all"},
+    {"api": "chrome.extension.getURL", "status": "deprecated", "note": "Replaced by chrome.runtime.getURL.", "replacement": "chrome.runtime.getURL", "appliesTo": "all"},
+    {"api": "chrome.extension.getViews", "status": "removed", "note": "Not available with MV3 service workers.", "replacement": "chrome.extension.getViews limited / message passing", "appliesTo": "all"},
+    {"api": "chrome.extension.sendRequest", "status": "removed", "note": "Ancient API removed long ago.", "replacement": "chrome.runtime.sendMessage", "appliesTo": "all"},
+    {"api": "chrome.extension.onRequest", "status": "removed", "note": "Ancient API removed long ago.", "replacement": "chrome.runtime.onMessage", "appliesTo": "all"},
+    {"api": "chrome.tabs.getAllInWindow", "status": "removed", "note": "Removed; use chrome.tabs.query.", "replacement": "chrome.tabs.query", "appliesTo": "all"},
+    {"api": "chrome.tabs.getSelected", "status": "removed", "note": "Removed; use chrome.tabs.query.", "replacement": "chrome.tabs.query", "appliesTo": "all"},
+    {"api": "chrome.tabs.onActiveChanged", "status": "removed", "note": "Removed; use onActivated.", "replacement": "chrome.tabs.onActivated", "appliesTo": "all"},
+    {"api": "chrome.webRequest.onBehavior", "status": "deprecated", "note": "Placeholder detection for unknown webRequest members.", "appliesTo": "all"},
+    {"api": "chrome.webstore", "status": "removed", "note": "Private API removed.", "appliesTo": "all"},
+    {"api": "chrome.input.ime", "status": "legacy pattern", "note": "Legacy keyboard API surface.", "appliesTo": "all"},
+    {"api": "chrome.webViewRequest", "status": "legacy pattern", "note": "Legacy app/WebView API.", "appliesTo": "all"},
+    {"api": "chrome.fileSystem", "status": "legacy pattern", "note": "Chrome App API; Chrome Apps are deprecated.", "appliesTo": "all"},
+    {"api": "chrome.socket", "status": "removed", "note": "Ancient app API removed.", "appliesTo": "all"},
+    {"api": "chrome.notifications.onClosed", "status": "deprecated", "note": "Use onNotificationClosed in some contexts.", "appliesTo": "all"},
+    {"api": "chrome.identity.getAuthToken", "status": "legacy pattern", "note": "Still functional but scoped to Google accounts; verify current usage.", "appliesTo": "all"},
+    {"api": "chrome.systemPrivate", "status": "removed", "note": "Private API.", "appliesTo": "all"},
+    {"api": "chrome.developerPrivate", "status": "legacy pattern", "note": "Private API used by Web Store; unusual in normal extensions.", "appliesTo": "all"}
+  ]
+}
