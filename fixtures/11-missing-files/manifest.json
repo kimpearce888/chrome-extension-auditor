@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Missing Files Fixture",
+  "version": "1.0.0",
+  "background": {
+    "service_worker": "does-not-exist.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "also-missing.js"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "nope.html"
+  }
+}

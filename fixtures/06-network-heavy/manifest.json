@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Network Heavy Fixture",
+  "version": "1.0.0",
+  "host_permissions": [
+    "https://api.example.com/*",
+    "https://cdn.example.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

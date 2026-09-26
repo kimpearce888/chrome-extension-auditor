@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Native Messaging Fixture",
+  "version": "1.0.0",
+  "permissions": [
+    "nativeMessaging",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

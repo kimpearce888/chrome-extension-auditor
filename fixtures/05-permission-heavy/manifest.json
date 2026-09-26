@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Permission Heavy Fixture",
+  "version": "1.0.0",
+  "permissions": [
+    "cookies",
+    "history",
+    "bookmarks",
+    "webNavigation",
+    "downloads",
+    "clipboardRead",
+    "clipboardWrite",
+    "management",
+    "identity",
+    "geolocation"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "http://*/*",
+    "file:///*"
+  ],
+  "optional_permissions": [
+    "debugger",
+    "proxy",
+    "privacy"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

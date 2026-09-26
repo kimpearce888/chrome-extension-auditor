@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Content Heavy Fixture",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "cs1.js",
+        "cs2.js"
+      ],
+      "css": [
+        "cs.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://example.com/*"
+      ],
+      "js": [
+        "cs3.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

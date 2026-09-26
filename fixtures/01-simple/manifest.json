@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Simple Fixture",
+  "version": "1.0.0",
+  "description": "Minimal well-behaved extension",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

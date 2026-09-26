@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Large Package Fixture",
+  "version": "1.0.0",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data.json",
+        "app.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
