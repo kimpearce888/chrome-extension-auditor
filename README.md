@@ -12,7 +12,7 @@ Evidence, not verdicts. No cloud. No telemetry. No scores.
 [![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D6)](https://github.com/kimpearce888/chrome-extension-auditor/releases)
 [![Local-only](https://img.shields.io/badge/100%25%20local-offline--first-188038)](docs/PRIVACY.md)
 
-[Installation](#installation) · [Try the demo](#try-it-without-installing-anything) · [How it works](#how-it-works) · [Findings philosophy](#what-a-finding-looks-like) · [Limitations](docs/LIMITATIONS.md)
+[Installation](#installation) · [Try the demo](#try-it-without-installing-anything) · [How it works](#how-it-works) · [Findings philosophy](#what-a-finding-looks-like) · [vs other tools](#how-this-compares-to-other-tools) · [Limitations](docs/LIMITATIONS.md)
 
 </div>
 
@@ -139,6 +139,31 @@ Full details: [docs/SECURITY.md](docs/SECURITY.md) · [docs/PRIVACY.md](docs/PRI
 ## What this tool is *not*
 
 Honesty is a feature. This is **not** an antivirus, not a malware verdict engine, and not proof of safety. Static analysis cannot see server-side behavior, runtime-generated code, or intent; heuristics are labeled as heuristics. It documents evidence so *you* can make an informed decision. The complete list of known blind spots is maintained in [docs/LIMITATIONS.md](docs/LIMITATIONS.md) — reading it is the best way to understand what the tool can and cannot tell you.
+
+## How this compares to other tools
+
+There is real browser-extension security tooling out there — it just lives at different points on the *who-analyzes-what-and-where* spectrum. An honest map (checked September 2026; services change — correction PRs welcome):
+
+| Tool | Model | What it's genuinely good at | What it doesn't do |
+|---|---|---|---|
+| **CRXcavator** (Duo Labs) | Cloud database | Pioneered mass risk-scoring of the entire Web Store; powered years of extension-security research | **Gone.** The service shut down and its domain no longer resolves — after which “audit what's installed on my machine” went back to being a manual chore |
+| **CRXplorer**, **ExtensionShield** and similar web scanners | Cloud | Paste a Web Store URL *before* installing and get a risk score, permission severity breakdown and source viewer; enterprise bulk scans | They analyze the current *store listing* — not necessarily the version installed on your machine (the two can differ); every lookup tells a server which extensions you're curious about; a single score hides the evidence behind it |
+| **ExtAnalysis** | Local, open source | The forensics community's workhorse for deep manual analysis of CRX/XPI files — URL retrohunts, domain intel, VirusTotal lookups | Built for analysts feeding it packages one at a time: no installed inventory, no multi-profile view, no scan history, no “what changed since the update” |
+| **CRX Source Viewer** | Browser extension | Instantly read the source of any store-listed extension — great for spot checks | It's a viewer: no analysis, no findings, no diffs, nothing about what's installed |
+| `chrome://extensions` + Safety Check | Built into Chrome | Always available; per-extension permission lists; store-status verdicts | Verdicts without visible evidence; no cross-time comparison; no multi-profile roll-up |
+| Antivirus browser companions | Commercial blockers | Real-time blocking of known-bad pages and downloads | They block, they don't explain — and they themselves request broad permissions |
+
+These are complements, not competitors. A sensible workflow: a paste-a-URL scanner *before* you install something new, this auditor *after* — and regularly, because extensions change under you — and a forensics framework when a single package deserves the full treatment.
+
+The combination this project exists for:
+
+- **Your installed state** — every Chrome profile, the version actually on disk, not the store listing
+- **100% local** — no query about your extension set ever leaves the machine
+- **Evidence instead of scores** — severity and confidence rated separately, file/line references, calibrated wording
+- **Change tracking over time** — snapshot diffs that catch the classic “it was fine when I installed it” problem
+- **Read-only by design** — an audit tool that can modify your browser is itself a risk
+
+If you know of another tool that already covers this exact combination, open an issue — linking it here beats duplicating it.
 
 ## Development
 

@@ -8,6 +8,10 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- README: "How this compares to other tools" — an honest landscape map
+  (CRXcavator-era cloud scanners, ExtAnalysis, source viewers, Chrome
+  built-ins, antivirus companions) with a complements-not-competitors
+  workflow and the niche this tool fills
 - Animated README tour (`docs/screenshots/demo.gif`, 25 s): a scripted
   first-run story — onboarding, live scan, search, security findings,
   read-only source viewer, snapshot diff, compare matrix — recorded from the
