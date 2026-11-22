@@ -3,6 +3,9 @@ extension/dist/
 package/
 native/scanner.exe
 native/scanner-demo
+native/scanner-linux-amd64
+native/scanner-linux-arm64
+native/cea_native
 native/localextensionauditor
 native/local-extension-auditor
 *.zip
