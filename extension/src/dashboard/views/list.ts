@@ -124,7 +124,20 @@ function listBody(): HTMLElement {
     wrap.append(el('div', { class: 'empty' }, 'No extensions match the current filters.'));
     return wrap;
   }
-  for (const e of filtered) wrap.append(extCard(e));
+  // Chrome built-in components (PDF viewer, Hangouts, ...) are part of the
+  // browser, not user-installed; group them apart so the list shows what the
+  // user actually has (§9 - no invented or misleading entries).
+  const isBuiltin = (e: ExtensionReport) => (e.installations || []).some((i) => i.installType === 'component');
+  const builtins = filtered.filter(isBuiltin);
+  for (const e of filtered) if (!isBuiltin(e)) wrap.append(extCard(e));
+  if (builtins.length) {
+    const detail = el('details', { class: 'builtin-group' });
+    detail.append(el('summary', {}, `Chrome built-in components (${builtins.length}) — part of Chrome, not installed by you`));
+    const inner = el('div', { class: 'grid' });
+    for (const e of builtins) inner.append(extCard(e));
+    detail.append(inner);
+    wrap.append(detail);
+  }
   return wrap;
 }
 
@@ -144,10 +157,15 @@ function extCard(e: ExtensionReport): HTMLElement {
     statusChip(e.overallStatus));
   main.append(title);
   const enabled = e.installations[0]?.enabled;
+  const notOnDisk = e.analysis?.status === 'NOT_ON_DISK';
   main.append(el('div', { class: 'ext-meta' },
-    `${e.installations.map((i) => i.profileName).join(', ') || 'Not available'} · ` +
-    `${enabled === undefined ? 'state Not available' : enabled ? 'Enabled' : 'Disabled'} · ` +
-    `${e.package.totalFiles} files · ${humanSize(e.package.totalSize)}`));
+    `${e.installations.map((i) => i.profileName).join(', ') || 'profile Not available'} · ` +
+    `${enabled === undefined ? 'state unknown' : enabled ? 'Enabled' : 'Disabled'} · ` +
+    (notOnDisk ? 'package folder not on disk' : `${e.package.totalFiles} files · ${humanSize(e.package.totalSize)}`)));
+  if (notOnDisk) {
+    main.append(el('div', { class: 'ext-meta hint' },
+      'Chrome keeps a preferences entry for this extension, but its folder is gone (uninstalled or cleaned up). Nothing to analyze.'));
+  }
   main.append(el('div', { class: 'ext-meta mono' }, e.id));
   main.append(el('div', { class: 'ext-counts' },
     spanB(`Security: ${byCat('security')}`),

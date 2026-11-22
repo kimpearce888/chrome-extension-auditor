@@ -146,6 +146,8 @@ a { color: var(--accent); }
 .chip.warn::before { content: "▲"; color: var(--warn); }
 .chip.bad::before { content: "■"; color: var(--bad); }
 .chip.info::before { content: "○"; color: var(--info); }
+.chip.muted { opacity: 0.75; font-style: italic; }
+.chip.muted::before { content: "–"; color: var(--muted, #8a93a6); }
 .chip.sev-critical { border-color: var(--bad); }
 .chip.sev-high { color: var(--bad); }
 .chip.sev-medium { color: var(--warn); }

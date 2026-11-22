@@ -4,7 +4,7 @@ import type { ExtensionReport, Finding, Profile } from '../../core/types';
 
 export function statusChip(status: string): HTMLElement {
   const cls = status === 'Healthy' ? 'ok' : status === 'Needs Review' ? 'warn'
-    : status === 'Significant Concerns' ? 'bad' : 'info';
+    : status === 'Significant Concerns' ? 'bad' : status === 'Not Analyzed' || status === 'Analysis Incomplete' ? 'muted' : 'info';
   return el('span', { class: `chip ${cls}` }, status);
 }
 
@@ -117,7 +117,7 @@ export function extIcon(ext: ExtensionReport): HTMLElement {
   img.src = `chrome-extension://${ext.id}/icon.png`;
   img.onerror = () => {
     img.replaceWith(el('div', { class: 'ext-icon', style: 'display:flex;align-items:center;justify-content:center;font-weight:700' },
-      (ext.name || '?').slice(0, 1).toUpperCase()));
+      (ext.name || ext.id || 'X').slice(0, 1).toUpperCase()));
   };
   return img;
 }

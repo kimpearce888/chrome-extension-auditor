@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Local Chrome Extension Auditor",
   "short_name": "Extension Auditor",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Fully local security, privacy, performance and code-health auditor for your installed Chrome extensions. No cloud, no telemetry.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs52ck+FQ0l/iAoktBt+R2N1AmsdilmoVgZhkZRLEVro/JpPc/QN8ADVCUUYmJU9OBSjsMyGgvP/F6ZDF7hDoqcbo6dTmTIA71lQGfIJYnzkTDWx3AW60lcciQpRhJBjk9jJ5Xgk/Qy0H00xIbEDD4CRJQCrIcdH4djVUvEzp8jt58cdfBtf4MMESEmxCGsh13j2b6lNbjNSdDJh2h67xSx1j6TGA5q++VbNtIwgbumdPLPaUXEY+qdDlXnDhrPMFZQTc+HmuWVDqHl3fxWf/Qj05eXi7q2Wac7zry5v061n9r0sGFaQSE5Wu7k82UnqLsXtsIYIVHfj67hIYtewttQIDAQAB",
   "minimum_chrome_version": "116",
@@ -17,7 +17,8 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": ["management", "nativeMessaging", "storage", "alarms"],
   "optional_permissions": ["notifications"],
