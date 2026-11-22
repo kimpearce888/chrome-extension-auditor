@@ -16,9 +16,9 @@ import (
 )
 
 type RedactionOptions struct {
-	RedactUsernames   bool `json:"redactUsernames"`
-	RedactPaths       bool `json:"redactPaths"`
-	RedactSecrets     bool `json:"redactSecrets"` // always effectively true
+	RedactUsernames    bool `json:"redactUsernames"`
+	RedactPaths        bool `json:"redactPaths"`
+	RedactSecrets      bool `json:"redactSecrets"` // always effectively true
 	RedactProfileNames bool `json:"redactProfileNames"`
 }
 

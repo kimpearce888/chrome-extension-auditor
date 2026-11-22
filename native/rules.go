@@ -24,14 +24,14 @@ var apiDeprecationsJSON []byte
 var depSignaturesJSON []byte
 
 type Rule struct {
-	ID             string `json:"id"`
-	Category       string `json:"category"`
-	Title          string `json:"title"`
-	Summary        string `json:"summary"`
-	WhyItMatters   string `json:"whyItMatters"`
-	Recommendation string `json:"recommendation"`
-	DefaultSeverity    string `json:"defaultSeverity"`
-	DefaultConfidence  string `json:"defaultConfidence"`
+	ID                string `json:"id"`
+	Category          string `json:"category"`
+	Title             string `json:"title"`
+	Summary           string `json:"summary"`
+	WhyItMatters      string `json:"whyItMatters"`
+	Recommendation    string `json:"recommendation"`
+	DefaultSeverity   string `json:"defaultSeverity"`
+	DefaultConfidence string `json:"defaultConfidence"`
 }
 
 type RuleSet struct {
@@ -41,10 +41,10 @@ type RuleSet struct {
 }
 
 type PermissionMeta struct {
-	Name        string `json:"name"`
-	Risk        string `json:"risk"`
-	Description string `json:"description"`
-	TypicalUse  string `json:"typicalUse"`
+	Name         string `json:"name"`
+	Risk         string `json:"risk"`
+	Description  string `json:"description"`
+	TypicalUse   string `json:"typicalUse"`
 	WhyItMatters string `json:"whyItMatters"`
 }
 
@@ -55,24 +55,24 @@ type PermissionSet struct {
 }
 
 type APIDeprecation struct {
-	API           string `json:"api"`
-	Status        string `json:"status"` // "removed" | "deprecated" | "legacy pattern"
-	Note          string `json:"note"`
-	Replacement   string `json:"replacement,omitempty"`
-	AppliesTo     string `json:"appliesTo,omitempty"` // "mv2" | "mv3" | "all"
+	API         string `json:"api"`
+	Status      string `json:"status"` // "removed" | "deprecated" | "legacy pattern"
+	Note        string `json:"note"`
+	Replacement string `json:"replacement,omitempty"`
+	AppliesTo   string `json:"appliesTo,omitempty"` // "mv2" | "mv3" | "all"
 }
 
 type APIDeprecationSet struct {
-	Version     string           `json:"version"`
-	Deprecations []APIDeprecation `json:"deprecations"`
-	index       map[string]APIDeprecation `json:"-"`
+	Version      string                    `json:"version"`
+	Deprecations []APIDeprecation          `json:"deprecations"`
+	index        map[string]APIDeprecation `json:"-"`
 }
 
 type DepSignature struct {
 	Library      string   `json:"library"`
 	License      string   `json:"license,omitempty"`
-	Signatures   []string `json:"signatures"`   // distinctive substrings (case-sensitive)
-	FileHints    []string `json:"fileHints"`    // likely filenames
+	Signatures   []string `json:"signatures"` // distinctive substrings (case-sensitive)
+	FileHints    []string `json:"fileHints"`  // likely filenames
 	VersionRegex string   `json:"versionRegex,omitempty"`
 }
 

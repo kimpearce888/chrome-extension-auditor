@@ -163,6 +163,10 @@ func disabledReasonName(reasons []any) string {
 	}
 	var parts []string
 	for _, r := range reasons {
+		if rs, ok := r.(string); ok && strings.TrimSpace(rs) != "" {
+			parts = append(parts, humanDisableReason(rs))
+			continue
+		}
 		switch int(toFloat(r)) {
 		case 0:
 			parts = append(parts, "Disabled by user")
@@ -191,6 +195,42 @@ func disabledReasonName(reasons []any) string {
 		}
 	}
 	return strings.Join(parts, ", ")
+}
+
+// humanDisableReason renders modern Chrome's string disable reasons. Since
+// around Chrome 120 the disable_reasons entries are stored as strings such
+// as "DISABLED_BY_USER" instead of numeric codes. Unknown values are shown
+// cleaned up (underscores to spaces, words capitalized) rather than guessed.
+func humanDisableReason(s string) string {
+	known := map[string]string{
+		"DISABLED_BY_USER":                         "Disabled by user",
+		"PERMISSIONS_INCREASE_NOT_ACKNOWLEDGED":    "Permissions increase not acknowledged",
+		"INSTALL_NOT_ACKNOWLEDGED":                 "Install not acknowledged",
+		"BLACKLISTED":                              "Disabled by blacklist / unsafe",
+		"DISABLED_BY_BLACKLIST":                    "Disabled by blacklist / unsafe",
+		"PARENTAL_CONTROLS":                        "Disabled by parental controls",
+		"UNSUPPORTED_API":                          "Unsupported API/maintenance",
+		"DISABLED_BY_POLICY":                       "Disabled by policy",
+		"RELOAD_REQUIRED":                          "Reload required",
+		"UNSUPPORTED_MANIFEST_VERSION":             "Disabled for unsupported manifest version",
+		"INCORRECT_INCOGNITO_CORRECTNESS":          "Disabled for incognito correctness",
+		"UPDATE_FROM_NEW_WEBSITE_NOT_ACKNOWLEDGED": "Update from new website not acknowledged",
+	}
+	if v, ok := known[strings.ToUpper(strings.TrimSpace(s))]; ok {
+		return v
+	}
+	cleaned := strings.ReplaceAll(strings.TrimSpace(s), "_", " ")
+	if cleaned == "" {
+		return "Not available"
+	}
+	var b strings.Builder
+	for i, w := range strings.Fields(cleaned) {
+		if i > 0 {
+			b.WriteByte(' ')
+		}
+		b.WriteString(strings.ToUpper(w[:1]) + w[1:])
+	}
+	return b.String()
 }
 
 func toFloat(v any) float64 {

@@ -287,8 +287,8 @@ func TestArchiveRejectsZipBomb(t *testing.T) {
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
 	w, err := zw.CreateHeader(&zip.FileHeader{
-		Name:           "bomb.txt",
-		Method:         zip.Deflate,
+		Name:             "bomb.txt",
+		Method:           zip.Deflate,
 		CompressedSize64: 1024,
 	})
 	if err != nil {
@@ -330,8 +330,8 @@ func TestCRX3HeaderStrip(t *testing.T) {
 
 func TestSafeExtractArchiveAcceptsNormalZip(t *testing.T) {
 	data := makeZip(t, map[string]string{
-		"manifest.json":  `{"manifest_version":3,"name":"Z","version":"1"}`,
-		"background.js":  "console.log(1);",
+		"manifest.json": `{"manifest_version":3,"name":"Z","version":"1"}`,
+		"background.js": "console.log(1);",
 	})
 	tmp := filepath.Join(t.TempDir(), "test.zip")
 	if err := os.WriteFile(tmp, data, 0o600); err != nil {
