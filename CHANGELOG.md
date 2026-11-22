@@ -4,6 +4,39 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.5] - 2026-11-23
+
+### Fixed
+- Extension names shown as raw `__MSG_...` placeholders (e.g. Chrome Web Store Payments): locale key lookup is now case-insensitive with an exact-match-first fallback, so `__MSG_APP_NAME__` resolves against lowercase keys like `app_name`.
+- Nonsensical or duplicated inventory entries: the extension inventory now merges on-disk installations with management/policy and preferences records into one consistent list — no ghost duplicates, and preferences leftovers whose folder is gone are marked **Not on disk** instead of being analyzed as if present.
+- Dashboard list: Chrome built-in components (PDF Viewer, Hangouts services, …) are grouped under a collapsible “Chrome built-in components — part of Chrome, not installed by you” section so the main list shows only what the user actually installed; cards for not-on-disk entries say so explicitly instead of showing empty file counts.
+- Dashboard details: status badges and card avatars no longer render broken states for unanalyzed/incomplete reports or missing names (falls back to the extension ID).
+- Regression coverage: new `fixes_test.go` suite locks in placeholder-name resolution and inventory merging; full Go test suite passes.
+
+### Changed
+- Fresh Linux distribution build: `chrome-extension-auditor-linux-v1.0.5.zip` with rebuilt extension (vite) and both native scanner binaries (x86-64, arm64).
+
+## [1.0.4] - 2026-11-18
+
+### Changed
+- Fresh distribution build for Linux: self-contained folder + versioned ZIP (`chrome-extension-auditor-linux-v1.0.4.zip`) with the extension, both native scanner binaries (x86-64 and arm64), installer scripts and docs in one place.
+- Version bumped across the board — extension manifest, `package.json` and the Go scanner (`ScannerVersion`) now all report **1.0.4** so the dashboard, `--version` output and scan reports stay consistent.
+
+## [1.0.2] - 2026-11-18
+
+### Fixed
+- Linux OS version in scan reports now shows the real distro (e.g. "Ubuntu 24.04 LTS") by reading `PRETTY_NAME` from `/etc/os-release`, instead of "Not available".
+- Chrome/Chromium version is now detected as a fallback when the extension does not send it (queries the local browser binary with `--version`), so protocol-level scans report real metadata.
+- Single-extension scan history records now store Chrome version and OS version.
+- Native host installation no longer depends on `/tmp` (cleared on reboot): the installer copies the scanner binary into `~/.local/share/LocalExtensionAuditor/scanner-v1.0.2/` and registers that persistent path for both Chrome and Chromium, preserving existing scan history.
+
+## [1.0.1] - 2026-11-17
+
+### Fixed
+- Unpacked (developer-mode) extensions installed via "Load unpacked" are now detected: discovery follows the `path` field in each profile's `Preferences` file, in addition to `Extensions/settings`.
+- `scanExtension` now accepts the documented `path` option to scan an arbitrary unpacked extension folder directly, without profile discovery (per PROTOCOL.md section 2).
+- Improved error messages: "missing extensionId or path", and clear "not installed" vs "disabled in this profile" distinctions.
+
 ## [Unreleased]
 
 ### Added

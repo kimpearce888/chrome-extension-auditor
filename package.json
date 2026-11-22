@@ -1,6 +1,6 @@
 {
   "name": "local-chrome-extension-auditor",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "private": true,
   "description": "Fully local Chrome Extension Auditor — MV3 extension + Go native scanner + LM Studio (local only).",
   "type": "module",
