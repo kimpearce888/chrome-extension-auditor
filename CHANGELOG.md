@@ -11,6 +11,7 @@ adheres to [Semantic Versioning](https://semver.org/).
 - Nonsensical or duplicated inventory entries: the extension inventory now merges on-disk installations with management/policy and preferences records into one consistent list — no ghost duplicates, and preferences leftovers whose folder is gone are marked **Not on disk** instead of being analyzed as if present.
 - Dashboard list: Chrome built-in components (PDF Viewer, Hangouts services, …) are grouped under a collapsible “Chrome built-in components — part of Chrome, not installed by you” section so the main list shows only what the user actually installed; cards for not-on-disk entries say so explicitly instead of showing empty file counts.
 - Dashboard details: status badges and card avatars no longer render broken states for unanalyzed/incomplete reports or missing names (falls back to the extension ID).
+- Extension icons/avatars not showing in the dashboard, with `Denying load of …/icon.png` errors on `chrome://extensions`: each scan report now embeds the extension's own icon as a base64 data URL (`iconData`, read from its package on disk and path-validated), which the dashboard uses for avatars — no cross-extension resource loads, so the errors are gone.
 - Regression coverage: new `fixes_test.go` suite locks in placeholder-name resolution and inventory merging; full Go test suite passes.
 
 ### Changed
