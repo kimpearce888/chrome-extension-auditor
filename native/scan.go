@@ -434,6 +434,7 @@ func (s *Scanner) ScanExtension(de *DiscoveredExtension, mode string, opts ScanO
 	}
 
 	fillBasicsFromManifest(report, de, primary, mi)
+	report.IconData = readIconDataURL(pkgPath, mi.Raw)
 
 	// Steps 6–7: inventory files, hash (incremental §92)
 	files, pkg, fileAnalyses, covNotes := s.InventoryAndAnalyzeFiles(pkgPath, mode, de.ID)

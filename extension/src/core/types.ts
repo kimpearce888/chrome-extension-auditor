@@ -201,6 +201,7 @@ export interface ExtensionReport {
   overallStatus: string;
   analysis: AnalysisState;
   ai?: AIAnalysis;
+  iconData?: string;
   unknownManifestFields?: string[];
 }
 

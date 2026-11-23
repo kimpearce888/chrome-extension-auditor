@@ -214,35 +214,40 @@ type AnalysisState struct {
 // ---- Full extension audit report ----
 
 type ExtensionReport struct {
-	ID                    string                  `json:"id"`
-	Name                  string                  `json:"name"`
-	ShortName             string                  `json:"shortName,omitempty"`
-	Description           string                  `json:"description"`
-	Version               string                  `json:"version"`
-	Type                  string                  `json:"type"`
-	HomepageURL           string                  `json:"homepageUrl"`
-	UpdateURL             string                  `json:"updateUrl"`
-	OptionsURL            string                  `json:"optionsUrl"`
-	Installations         []ExtensionInstallation `json:"installations"`
-	ManifestVersion       int                     `json:"manifestVersion"`
-	Permissions           []PermissionInfo        `json:"permissions"`
-	HostPermissions       []HostPatternInfo       `json:"hostPermissions"`
-	ContentScripts        []ContentScriptInfo     `json:"contentScripts"`
-	Background            BackgroundInfo          `json:"background"`
-	APIs                  []APIUsage              `json:"apis"`
-	Network               []NetworkEndpoint       `json:"network"`
-	Dependencies          []Dependency            `json:"dependencies"`
-	Files                 []FileInfo              `json:"files"`
-	Package               PackageStats            `json:"package"`
-	Readability           ReadabilityReport       `json:"readability"`
-	Findings              []Finding               `json:"findings"`
-	Tags                  []string                `json:"tags"`
-	Health                map[string]string       `json:"health"` // category -> status
-	OverallStatus         string                  `json:"overallStatus"`
-	Analysis              AnalysisState           `json:"analysis"`
-	AI                    *AIAnalysis             `json:"ai,omitempty"`
-	ManifestRaw           map[string]any          `json:"manifestRaw,omitempty"`
-	UnknownManifestFields []string                `json:"unknownManifestFields,omitempty"`
+	ID              string                  `json:"id"`
+	Name            string                  `json:"name"`
+	ShortName       string                  `json:"shortName,omitempty"`
+	Description     string                  `json:"description"`
+	Version         string                  `json:"version"`
+	Type            string                  `json:"type"`
+	HomepageURL     string                  `json:"homepageUrl"`
+	UpdateURL       string                  `json:"updateUrl"`
+	OptionsURL      string                  `json:"optionsUrl"`
+	Installations   []ExtensionInstallation `json:"installations"`
+	ManifestVersion int                     `json:"manifestVersion"`
+	Permissions     []PermissionInfo        `json:"permissions"`
+	HostPermissions []HostPatternInfo       `json:"hostPermissions"`
+	ContentScripts  []ContentScriptInfo     `json:"contentScripts"`
+	Background      BackgroundInfo          `json:"background"`
+	APIs            []APIUsage              `json:"apis"`
+	Network         []NetworkEndpoint       `json:"network"`
+	Dependencies    []Dependency            `json:"dependencies"`
+	Files           []FileInfo              `json:"files"`
+	Package         PackageStats            `json:"package"`
+	Readability     ReadabilityReport       `json:"readability"`
+	Findings        []Finding               `json:"findings"`
+	Tags            []string                `json:"tags"`
+	Health          map[string]string       `json:"health"` // category -> status
+	OverallStatus   string                  `json:"overallStatus"`
+	Analysis        AnalysisState           `json:"analysis"`
+	AI              *AIAnalysis             `json:"ai,omitempty"`
+	// IconData is the extension's own icon, read from its package on disk and
+	// embedded as a base64 data URL. The dashboard cannot load other
+	// extensions' chrome-extension:// resources (they must be declared in that
+	// extension's web_accessible_resources), so icons travel with the report.
+	IconData              string         `json:"iconData,omitempty"`
+	ManifestRaw           map[string]any `json:"manifestRaw,omitempty"`
+	UnknownManifestFields []string       `json:"unknownManifestFields,omitempty"`
 }
 
 // ---- Snapshots & diffs (§63, §130) ----

@@ -112,12 +112,23 @@ export function profileChips(profiles: Profile[]): HTMLElement {
     el('span', { class: 'chip info', title: p.dir }, `${p.name} (${p.extensionCount})`)));
 }
 
+// Icons of other extensions cannot be loaded via chrome-extension:// URLs:
+// that resource would have to be declared in the *other* extension's
+// web_accessible_resources, which we cannot control (and Chrome logs a
+// "Denying load" error for every attempt). The scanner reads each icon from
+// disk and ships it as a data URL with the report; older reports without one
+// fall back to an initial-letter avatar.
 export function extIcon(ext: ExtensionReport): HTMLElement {
-  const img = el('img', { class: 'ext-icon', alt: '' }) as HTMLImageElement;
-  img.src = `chrome-extension://${ext.id}/icon.png`;
-  img.onerror = () => {
-    img.replaceWith(el('div', { class: 'ext-icon', style: 'display:flex;align-items:center;justify-content:center;font-weight:700' },
-      (ext.name || ext.id || 'X').slice(0, 1).toUpperCase()));
-  };
-  return img;
+  if (ext.iconData) {
+    const img = el('img', { class: 'ext-icon', alt: '', loading: 'lazy' }) as HTMLImageElement;
+    img.src = ext.iconData;
+    img.onerror = () => img.replaceWith(iconInitial(ext));
+    return img;
+  }
+  return iconInitial(ext);
+}
+
+function iconInitial(ext: ExtensionReport): HTMLElement {
+  return el('div', { class: 'ext-icon', style: 'display:flex;align-items:center;justify-content:center;font-weight:700' },
+    (ext.name || ext.id || 'X').slice(0, 1).toUpperCase());
 }
