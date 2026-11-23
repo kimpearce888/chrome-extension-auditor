@@ -9,7 +9,7 @@ Evidence, not verdicts. No cloud. No telemetry. No scores.
 [![CI](https://github.com/kimpearce888/chrome-extension-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/kimpearce888/chrome-extension-auditor/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/kimpearce888/chrome-extension-auditor?color=blue)](https://github.com/kimpearce888/chrome-extension-auditor/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D6)](https://github.com/kimpearce888/chrome-extension-auditor/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20x64%20%7C%20Linux%20x86-64%2Farm64-0078D6)](https://github.com/kimpearce888/chrome-extension-auditor/releases)
 [![Local-only](https://img.shields.io/badge/100%25%20local-offline--first-188038)](docs/PRIVACY.md)
 
 [Installation](#installation) · [Try the demo](#try-it-without-installing-anything) · [How it works](#how-it-works) · [Findings philosophy](#what-a-finding-looks-like) · [vs other tools](#how-this-compares-to-other-tools) · [Limitations](docs/LIMITATIONS.md)
@@ -60,16 +60,27 @@ The full contract between extension and scanner — every action, parameter and 
 
 ## Installation
 
-Requirements: Windows 10/11 x64 and Google Chrome.
+Requirements: Google Chrome (or Chromium) on **Linux (x86-64 / arm64)** or Windows 10/11 x64. No compiler, no runtime dependencies — the Go scanner ships prebuilt for both platforms.
+
+### Linux
+
+1. Download `chrome-extension-auditor-linux-v1.0.5.zip` from the [latest release](https://github.com/kimpearce888/chrome-extension-auditor/releases) and extract it to a folder you control (e.g. `~/Tools/local-extension-auditor`). Keep it there — the install is portable and points at this folder.
+2. Run **`./installer/install.sh`** (or `bash installer/install.sh` if your extractor stripped execute bits). It detects your CPU architecture, verifies the bundled scanner, writes the native messaging host manifest inside the package, and registers it for your Chrome/Chromium profile — per-user only, no root, nothing else touched.
+3. Chrome will not silently install self-hosted extensions, and this project will not pretend otherwise: open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select the **`extension/dist`** folder from the extracted package (install.sh prints the exact path at the end).
+4. Click the auditor's toolbar icon (or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>) and run your first scan.
+
+Anything behaving oddly? **`./installer/Diagnose.sh`** runs a full PASS/FAIL checklist (host registration, protocol loopback, permissions, data directory). Uninstalling is equally boring: **`./installer/uninstall.sh`** removes only this tool's own artifacts.
+
+### Windows
 
 1. Download `Local-Chrome-Extension-Auditor-Windows.zip` from the [latest release](https://github.com/kimpearce888/chrome-extension-auditor/releases) and extract it to a folder you control (e.g. `C:\Tools\Local-Extension-Auditor`).
 2. Run **`Install.bat`**. It registers the native messaging host per-user (HKCU registry only — no elevation, no admin, no services).
 3. Chrome will not silently install self-hosted extensions, and this project will not pretend otherwise: open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select the `extension` folder from the extracted package.
 4. Click the auditor's toolbar icon (or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>) and run your first scan.
 
-**Optional AI:** install [LM Studio](https://lmstudio.ai), start its local server, download any chat model, then in the auditor: *Settings → LM Studio → Test Connection*. Without it you still get the complete technical audit — the AI layer only adds plain-language explanations and the Ask-the-Auditor chat.
+**Optional AI (both platforms):** install [LM Studio](https://lmstudio.ai), start its local server, download any chat model, then in the auditor: *Settings → LM Studio → Test Connection*. Without it you still get the complete technical audit — the AI layer only adds plain-language explanations and the Ask-the-Auditor chat.
 
-Anything behaving oddly? **`Diagnose.bat`** runs a full PASS/FAIL checklist (host registration, protocol loopback, permissions, data directory). Uninstalling is equally boring: **`Uninstall.bat`** removes only this tool's own artifacts.
+Anything behaving oddly on Windows? **`Diagnose.bat`** runs a full PASS/FAIL checklist (host registration, protocol loopback, permissions, data directory). Uninstalling is equally boring: **`Uninstall.bat`** removes only this tool's own artifacts.
 
 ## Try it without installing anything
 
